@@ -5,15 +5,16 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 const register = async (req, res) => {
-  const { fname, lname, email, number, password, referral } = req.body;
+  const { fname, lname, email,  phone, password, referral } = req.body;
 
-  if (!fname || !lname || !email || !number || !password)
+  if (!fname || !lname || !email || !phone || !password)
     res.json({
       error: true,
       success: false,
       message: "some of the fields are missing!!!",
     });
   const check = await User.findOne({email: email });
+
 
   if(check == null)
     {            
@@ -23,7 +24,7 @@ const register = async (req, res) => {
               fname,
               lname,
               email,
-              number,
+               phone,
               password: hashedPassword,
               referral,
             });
@@ -41,6 +42,7 @@ const register = async (req, res) => {
                   success: false,
                   message:
                     "An internal server error has been occurred while registering!!!!",
+                  err
                 })
               }
              
@@ -121,9 +123,9 @@ const getUser = async(req, res) => {
   res.json(user)
 }
 const updateUser = async(req, res) => {
-  const {fname, lname, email, number} = req.body 
+  const {fname, lname, email,  phone} = req.body 
 
-  const user = await User.findByIdAndUpdate({_id: req.token_data._id}, {fname, lname, email, number}).then(()=>{
+  const user = await User.findByIdAndUpdate({_id: req.token_data._id}, {fname, lname, email,  phone}).then(()=>{
     res.json(
       {
         error: false,

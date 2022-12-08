@@ -7,10 +7,10 @@ const user = new Schema({
     fname: {type: String, require: true},
     lname: {type: String, require: true},
     email: {type: String, require: true},
-    number: {type: String, require: true},
+    phone: {type: String, require: true},
     password: {type: String, require: true},
     referaral: {type: String}
 }, {timestamps: true})
 
-user.plugin(passportLocalMongoose)
+// user.plugin(passportLocalMongoose)
 module.exports = mongoose.model("user", user)

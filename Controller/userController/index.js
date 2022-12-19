@@ -101,7 +101,7 @@ const login = async (req, res) =>{
             )
         }
         else{
-            const token = jwt.sign({_id: user._id}, process.env.MY_SECRET, {expiresIn: "18000s"})
+            const token = jwt.sign({_id: user._id}, process.env.MY_SECRET, {expiresIn: "180000000000s"})
             
             res.cookie("token", token, {
                 httpOnly: true

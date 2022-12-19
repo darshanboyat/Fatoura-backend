@@ -13,7 +13,7 @@ module.exports.getBills = async (req, res) => {
 };
 
 module.exports.postBills = async (req, res) => {
-    const {billNumber, billDate, dueDate, referenceNumber, customerName, billingAddress, shippingAddress, description, termsAndCondition, eSign, companyLogo, companyName, companyAddress, entityId, gstNumber, qrHeading, qrImage, itemCount} = req.body;
+    const {billDate, dueDate, referenceNumber, customerName, billingAddress, shippingAddress, description, termsAndCondition, eSign, companyLogo, companyName, companyAddress, entityId, gstNumber, qrHeading, qrImage, itemArray} = req.body;
   if (!customerName || !billingAddress || !companyName) {
     res.json(
         {
@@ -23,7 +23,7 @@ module.exports.postBills = async (req, res) => {
         }
     )
   }
-  else if(itemCount < 1 || itemCount === undefined || itemCount === null)
+  else if(itemArray.length < 1 || itemArray === undefined || itemArray === null)
   {
     res.json(
         {
@@ -60,7 +60,8 @@ module.exports.postBills = async (req, res) => {
             entityId, 
             gstNumber, 
             qrHeading, 
-            qrImage
+            qrImage,
+            items: JSON.parse(itemArray)
     }
     await Bill.create(bill).then(()=>{
         res.json(

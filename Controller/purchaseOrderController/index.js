@@ -14,7 +14,7 @@ module.exports.getPurchareOrder = async(req, res) => {
 };
 
 module.exports.postPurchareOrder = async(req, res) => {
-    const {purchaseNumber, purchaseDate, referenceNumber, customerName, billingAddress, description, termsAndCondition, companyLogo, companyName, companyAddress, entityId, gstNumber, itemCount} = req.body
+    const {purchaseNumber, purchaseDate, referenceNumber, customerName, billingAddress, description, termsAndCondition, companyLogo, companyName, companyAddress, entityId, gstNumber, itemArray} = req.body
 
     if(!customerName || !billingAddress || !companyName || !companyAddress)
     {
@@ -26,7 +26,7 @@ module.exports.postPurchareOrder = async(req, res) => {
             }
         )
     }
-    else if(itemCount < 1 || itemCount === undefined || itemCount === null)
+    else if(itemArray.length < 1 || itemArray === undefined || itemArray === null)
     {
         res.json(
             {
@@ -57,7 +57,8 @@ module.exports.postPurchareOrder = async(req, res) => {
             companyName, 
             companyAddress, 
             entityId, 
-            gstNumber
+            gstNumber,
+            items: JSON.parse(itemArray)
         }
         
         await Purchase.create(purchase).then(response => {

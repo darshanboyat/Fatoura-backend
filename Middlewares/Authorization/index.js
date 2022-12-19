@@ -14,6 +14,7 @@ module.exports.verifyToken = (req, res, next)=>{
                 {
                     res.json(
                         {
+                            err,
                             error: true,
                             success: false,
                             message: "An error has been occurred while validating JWT"

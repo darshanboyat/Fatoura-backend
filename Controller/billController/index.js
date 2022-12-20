@@ -3,7 +3,7 @@ const Bill = require('../../Model/bills')
 module.exports.getBills = async (req, res) => {
     const userBills = await Bill.find({userId: req.token_data._id})
 
-    res.json(
+    res.status(200).json(
         {
             error: false,
             success: true,
@@ -15,7 +15,7 @@ module.exports.getBills = async (req, res) => {
 module.exports.postBills = async (req, res) => {
     const {billDate, dueDate, referenceNumber, customerName, billingAddress, shippingAddress, description, termsAndCondition, eSign, companyLogo, companyName, companyAddress, entityId, gstNumber, qrHeading, qrImage, itemArray} = req.body;
   if (!customerName || !billingAddress || !companyName) {
-    res.json(
+    res.status(501).json(
         {
             error: true,
             success: false,
@@ -25,7 +25,7 @@ module.exports.postBills = async (req, res) => {
   }
   else if(itemArray.length < 1 || itemArray === undefined || itemArray === null)
   {
-    res.json(
+    res.status(501).json(
         {
             error: true,
             success: false,
@@ -64,7 +64,7 @@ module.exports.postBills = async (req, res) => {
             items: JSON.parse(itemArray)
     }
     await Bill.create(bill).then(()=>{
-        res.json(
+        res.status(200).json(
             {
                 error: false,
                 success: true,
@@ -72,7 +72,7 @@ module.exports.postBills = async (req, res) => {
             }
         )
     }).catch(err=>{
-        res.json(
+        res.status(501).json(
             {
                 error: true,
                 success: false,
@@ -82,3 +82,28 @@ module.exports.postBills = async (req, res) => {
     })
   }
 }
+
+module.exports.viewBill = async (req, res) => {
+    const id = req.params.id;
+
+    await Bill.findById({_id: id}).then(result => {
+        res.status(200).json(
+            {
+                error: false,
+                success: true,
+                message: "Bill Found Successfully...",
+                result
+            }
+        )
+    }).catch(err => {
+        res.status(501).json(
+            {
+                error: true,
+                success: false,
+                message: "Bill Not Found...",
+                err
+            }
+        )
+    })
+
+};

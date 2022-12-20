@@ -81,3 +81,28 @@ module.exports.postQoute = async(req, res) => {
 
     }
 };
+
+module.exports.viewQoute = async (req, res) => {
+    const id = req.params.id;
+
+    await Qoute.findById({_id: id}).then(result => {
+        res.status(200).json(
+            {
+                error: false,
+                success: true,
+                message: "Qoute Found Successfully...",
+                result
+            }
+        )
+    }).catch(err => {
+        res.status(501).json(
+            {
+                error: true,
+                success: false,
+                message: "Qoute Not Found...",
+                err
+            }
+        )
+    })
+
+};

@@ -97,7 +97,6 @@ module.exports.postInvoice = async (req, res) => {
 };
 
 module.exports.viewInvoice = async (req, res) => {
-  // const {invoiceId} = req.body
   var id = req.params.id;
   await Invoice.find({ _id: id })
     .then((response) => {

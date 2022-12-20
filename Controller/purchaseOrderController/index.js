@@ -81,3 +81,29 @@ module.exports.postPurchareOrder = async(req, res) => {
 
     }
 };
+
+
+module.exports.viewPurchase = async (req, res) => {
+    const id = req.params.id;
+
+    await Purchase.findById({_id: id}).then(result => {
+        res.status(200).json(
+            {
+                error: false,
+                success: true,
+                message: "Qoute Found Successfully...",
+                result
+            }
+        )
+    }).catch(err => {
+        res.status(501).json(
+            {
+                error: true,
+                success: false,
+                message: "Qoute Not Found...",
+                err
+            }
+        )
+    })
+
+};

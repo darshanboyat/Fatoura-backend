@@ -17,9 +17,15 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}).then(()
 
 app.use(bodyParser.json())
 app.use(cors({
-    origin: "https://fatoura-five.vercel.app"
+    origin: "https://fatoura-five.vercel.app",
 }))
-
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'https://fatoura-five.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+    });
 app.use(User)
 app.use(invoice)
 app.use(bill)

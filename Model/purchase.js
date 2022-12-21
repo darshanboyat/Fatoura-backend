@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 let today = new Date().toLocaleDateString();
 const purchase = new Schema({
-  type: { type: String, default: "Bill" },
+  type: { type: String, default: "Purchase Order" },
   userId: { type: String, require: true },
   purchaseNumber: { type: String },
   purchaseDate: { type: String, default: today },

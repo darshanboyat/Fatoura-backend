@@ -3,7 +3,7 @@ const Company = require("../../Model/company");
 
 module.exports.getCompany = async (req, res) => {
   const company = await Company.find({ userId: req.token_data._id });
-  res.status(200).json({
+  res.json({
     error: false,
     success: true,
     company: company,
@@ -49,7 +49,7 @@ module.exports.postCompany = async (req, res) => {
         });
       })
       .catch((err) => {
-        res.status(501).json({
+        res.json({
           error: true,
           success: false,
           message: "An error has been occurred while adding a company!!!",

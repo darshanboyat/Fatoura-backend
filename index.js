@@ -18,9 +18,9 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}).then(()
 app.use(bodyParser.json())
 app.use(cors())
 
-// app.use(cors({
-//     origin: "https://fatoura-five.vercel.app",
-// }))
+app.use(cors({
+    origin: "*",
+}))
 // app.use(function (req, res, next) {
 //     res.setHeader('Access-Control-Allow-Origin', 'https://fatoura-five.vercel.app');
 //     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

@@ -16,16 +16,19 @@ const url = "mongodb+srv://darshboyat:3277426269@cluster1.onjgrzp.mongodb.net/?r
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}).then(()=> console.log('Database Connected Successfully....')).catch(()=> console.log('Ohhhh an error occured'))
 
 app.use(bodyParser.json())
-app.use(cors({
-    origin: "https://fatoura-five.vercel.app",
-}))
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://fatoura-five.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-    });
+app.use(cors())
+
+// app.use(cors({
+//     origin: "https://fatoura-five.vercel.app",
+// }))
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', 'https://fatoura-five.vercel.app');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     res.setHeader('Access-Control-Allow-Credentials', true);
+//     next();
+//     });
+
 app.use(User)
 app.use(invoice)
 app.use(bill)

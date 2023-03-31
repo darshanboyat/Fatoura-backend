@@ -12,7 +12,7 @@ const mongoose = require('mongoose')
 const path = require("path")
 const cors = require('cors')
 
-const url = process.env.URL // A duplicate index key error has been occured with this URL
+const url = process.env.DBURL // A duplicate index key error has been occured with this URL
 // const url = "mongodb://localhost:27017/Fatroua"
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}).then(()=> console.log('Database Connected Successfully....')).catch(()=> console.log('Ohhhh an error occured'))
 

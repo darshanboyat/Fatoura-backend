@@ -15,7 +15,6 @@ const register = async (req, res) => {
     });
   const check = await User.findOne({email: email });
 
-
   if(check == null)
     {            
             const hashedPassword = await bcrypt.hash(password, 10);

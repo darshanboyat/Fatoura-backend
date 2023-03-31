@@ -9,9 +9,10 @@ const purchase = require('./Routes/purchaseOrderRoutes')
 const bodyParser = require('body-parser')
 const app = express();
 const mongoose = require('mongoose')
+const path = require("path")
 const cors = require('cors')
 
-const url = "mongodb+srv://darshboyat:3277426269@cluster1.onjgrzp.mongodb.net/?retryWrites=true&w=majority" // A duplicate index key error has been occured with this URL
+const url = process.env.URL // A duplicate index key error has been occured with this URL
 // const url = "mongodb://localhost:27017/Fatroua"
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}).then(()=> console.log('Database Connected Successfully....')).catch(()=> console.log('Ohhhh an error occured'))
 
@@ -21,14 +22,10 @@ app.use(cors())
 app.use(cors({
     origin: "*",
 }))
-// app.use(function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', 'https://fatoura-five.vercel.app');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-//     next();
-//     });
 
+app.get("/test-route", (req, res)=>{res.status(200).send("<h1>Everything Alright 😉</h1>")}) //Test route
+
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(User)
 app.use(invoice)
 app.use(bill)

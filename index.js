@@ -1,5 +1,5 @@
 const express = require('express')
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8000;
 const User = require('./Routes/userRoutes/getUser')
 const company = require('./Routes/companyRoutes')
 const invoice = require('./Routes/invoiceRoutes')
